@@ -14,15 +14,15 @@ A imagem já carrega:
 ## Build local
 
 ```bash
-docker build -t sargaco-monstro:local infra/sargaco-monstro
+docker build -t sargaco-monstro:local .
 ```
 
 ## Exemplo de uso no compose
 
 ```yaml
-seaweedfs:
+sargaco:
   image: ghcr.io/araticum/sargaco-monstro:latest
-  container_name: monstro-seaweedfs
+  container_name: monstro-sargaco
   restart: unless-stopped
   ports:
     - "${SEAWEEDFS_S3_PORT:-8333}:8333"
@@ -30,7 +30,7 @@ seaweedfs:
   environment:
     - SEAWEED_VOLUME_MAX=${SEAWEED_VOLUME_MAX:-30}
   volumes:
-    - seaweedfs-data:/data
+    - sargaco-data:/data
   networks: [monstro-net]
 ```
 
